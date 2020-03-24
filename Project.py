@@ -76,13 +76,6 @@ df1.drop('CarName', axis=1, inplace=True)
 
 
 
-''''
-#pulling out the df to csv for reading purpose:
-df1.to_csv("C:\\Users\\anupam.b.kumar.singh\\Documents\\Personal_Files\\Predictive Analysis1\\df1.csv")
-'''
-
-
-
 #checking the uniqueness of company names
 list(df1.Company.unique())
 
@@ -315,16 +308,11 @@ vif['VIF'] = [variance_inflation_factor(X_train_lm.values, i) for i in range(X_t
 vif['VIF'] = round(vif['VIF'], 2)
 vif = vif.sort_values(by = "VIF", ascending = False)
 vif
-
-
 #4bbl happens to be out of p-value range, so removing as its insignificant
 X=X_train_lm.drop('enginesize',1)
 X_train_lm = sm.add_constant(X)
 lr_3 = sm.OLS(y_train, X_train_lm).fit()
 print(lr_3.summary())
-
-
-
 vif = pd.DataFrame()
 vif['Features'] = X_train_lm.columns
 vif['VIF'] = [variance_inflation_factor(X_train_lm.values, i) for i in range(X_train_lm.shape[1])]
